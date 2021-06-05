@@ -5,20 +5,19 @@ import software.amazon.awssdk.services.dynamodb.{DynamoDbAsyncClient}
 import java.net.URI
 
 
-class DynamoClientProvider[F[_] : Async](host: String, region: Region) {
+class DynamoClientProvider(host: String, region: Region) {
 
-
-  def clientResource: Resource[F, DynamoDbAsyncClient] =
+  def clientResource: Resource[IO, DynamoDbAsyncClient] =
     Resource.make(acquire)(release)
 
-  private def acquire: F[DynamoDbAsyncClient] = Async[F].delay {
+  private def acquire: IO[DynamoDbAsyncClient] = Async[IO].delay {
     DynamoDbAsyncClient.builder()
       .region(region)
       .endpointOverride(URI.create(s"http://$host:8000/"))
       .build()
   }
 
-  private def release(client: DynamoDbAsyncClient): F[Unit] =
-    Async[F].delay(client.close())
+  private def release(client: DynamoDbAsyncClient): IO[Unit] =
+    Async[IO].delay(client.close())
 
 }
