@@ -11,6 +11,10 @@ The content in the table should be the same after the program
 
 Looks like the table contains duplicates. The second time the program run it crashes, see stack trace below.
 
+## Running on
+* macOS Big Sur Version 11.4
+* MacBook Air (M1, 2020)
+
 ## To reproduce the bug
 
 ### Setup
