@@ -13,12 +13,13 @@ Looks like the table contains duplicates. The second time the program run it cra
 
 ## To reproduce the bug
 
-Setup
+### Setup
 * Comment out app-node part in docker-compose.yaml so that we only start dynamo-db
 * Create a table and insert an item using the aws cli commands below
 * docker-compose down
 * Add the commented out app-node part in the docker-compose.yaml
 
+### Test
 * docker-compose up
 * Let the program run
 * docker-compose down
