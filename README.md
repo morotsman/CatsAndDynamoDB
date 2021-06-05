@@ -34,10 +34,10 @@ docker-compose up
 ## Configure AWS console
 
 > aws configure                                                
-AWS Access Key ID [None]:1
-AWS Secret Access Key [None]:2
-Default region name [None]: us-west-1
-Default output format [None]:
+>AWS Access Key ID [None]:1
+>AWS Secret Access Key [None]:2
+>Default region name [None]: us-west-1
+>Default output format [None]:
 
 ## Test setup:
 
