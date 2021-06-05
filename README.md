@@ -79,15 +79,20 @@ AttributeName=Artist,AttributeType=S \
 ## Trace after first time docker-compose up
 
 >app-node          | Start program
-app-node          | Before putAll: List(Right(Music(Artist1,Song1,Album1)))
-app-node          | After putAll: List(Right(Music(Artist1,Song1,Album1)), Right(Music(Artist1,Song1,Album1)))
-app-node          | Program completed
+
+>app-node          | Before putAll: List(Right(Music(Artist1,Song1,Album1)))
+
+>app-node          | After putAll: List(Right(Music(Artist1,Song1,Album1)), Right(Music(Artist1,Song1,Album1)))
+
+>app-node          | Program completed
 
 ## Trace after first second docker-compose up
 
 >app-node          | Start program
-app-node          | Before putAll: List(Right(Music(Artist1,Song1,Album1)), Right(Music(Artist1,Song1,Album1)))
-dynamodb-local    | Jun 05, 2021 7:47:58 AM com.almworks.sqlite4java.Internal log
+
+>app-node          | Before putAll: List(Right(Music(Artist1,Song1,Album1)), Right(Music(Artist1,Song1,Album1)))
+
+>dynamodb-local    | Jun 05, 2021 7:47:58 AM com.almworks.sqlite4java.Internal log
 dynamodb-local    | WARNING: [sqlite] SQLiteDBAccess$14@4b0e6f64: job exception
 dynamodb-local    | com.amazonaws.services.dynamodbv2.local.shared.exceptions.LocalDBAccessException: Given key conditions were not unique. Returned: [{Artist=AttributeValue: {S:Artist1}, SongTitle=AttributeValue: {S:Song1}, AlbumTitle=AttributeValue: {S:Album1}}] and [{Artist=AttributeValue: {S:Artist1}, AlbumTitle=AttributeValue: {S:Album1}, SongTitle=AttributeValue: {S:Song1}}].
 dynamodb-local    | 	at com.amazonaws.services.dynamodbv2.local.shared.access.LocalDBUtils.ldAccessFail(LocalDBUtils.java:799)
