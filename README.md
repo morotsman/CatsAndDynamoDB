@@ -1,3 +1,31 @@
+## What the program does
+Start up two docker containers, one with DynamoDB and one with a small Scala app.
+
+The Scala app reads the items stored in the Music table and then write the same posts back
+
+## Expected behavior
+
+The content in the table should be the same after the program 
+
+## In reality
+
+Looks like the table contains duplicates. The second time the program run in crashes, see stack trace below.
+
+## To reproduce the bug
+
+Setup
+* Comment out app-node part in docker-compose.yaml so that we only start dynamo-db
+* Create a table and insert an item using the aws cli commands below
+* docker-compose down
+* Add the commented out app-node part in the docker-compose.yaml
+
+* docker-compose up
+* Let the program run
+* docker-compose down
+* docker-compose up
+
+
+
 ## Start local DynamoDB
 
 docker-compose up
