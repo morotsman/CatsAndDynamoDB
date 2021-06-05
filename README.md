@@ -14,6 +14,7 @@ Looks like the table contains duplicates. The second time the program run it cra
 ## To reproduce the bug
 
 ### Setup
+* Build the app and publish it on local repo, see build instructions below
 * Comment out app-node part in docker-compose.yaml so that we only start dynamo-db
 * Create a table and insert an item using the aws cli commands below
 * docker-compose down
@@ -68,13 +69,12 @@ AttributeName=Artist,AttributeType=S \
 --table-name Music \
 --endpoint-url http://localhost:8000
 
-## Build and deploy
+## Build and publish
 
 >sbt assembly
 
 >docker build -t "niklastest" .
 
->docker-compose up
 
 ## Trace after first time docker-compose up
 
