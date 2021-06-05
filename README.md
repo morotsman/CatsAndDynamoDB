@@ -20,6 +20,7 @@ Looks like the table contains duplicates. The second time the program run it cra
 ### Setup
 * Build the app and publish it on local repo, see build instructions below
 * Comment out app-node part in docker-compose.yaml so that we only start dynamo-db
+* docker-compose up
 * Create a table and insert an item using the aws cli commands below
 * docker-compose down
 * Add the commented out app-node part in the docker-compose.yaml
