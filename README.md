@@ -9,7 +9,7 @@ The content in the table should be the same after the program
 
 ## In reality
 
-Looks like the table contains duplicates. The second time the program run in crashes, see stack trace below.
+Looks like the table contains duplicates. The second time the program run it crashes, see stack trace below.
 
 ## To reproduce the bug
 
