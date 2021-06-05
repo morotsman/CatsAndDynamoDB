@@ -44,7 +44,7 @@ docker-compose up
 
 >Default output format [None]:
 
-## Create table (used in demo)
+## Create table
 
 > aws dynamodb create-table \
 --table-name Music \
