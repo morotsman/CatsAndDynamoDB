@@ -26,23 +26,37 @@ Remember to add --endpoint-url http://localhost:8000 to all AWS console commands
 --table-name Music \
 --attribute-definitions \
 AttributeName=Artist,AttributeType=S \
-AttributeName=SongTitle,AttributeType=S \
---key-schema AttributeName=Artist,KeyType=HASH AttributeName=SongTitle,KeyType=RANGE \
+--key-schema AttributeName=Artist,KeyType=HASH \
 --provisioned-throughput ReadCapacityUnits=1,WriteCapacityUnits=1 \
 --endpoint-url http://localhost:8000
 
 ## add item
 
->aws dynamodb put-item \
+> aws dynamodb put-item \
 --table-name Music \
 --item \
-'{"Artist": {"S": "No One You Know"}, "SongTitle": {"S": "Call Me Today"}, "AlbumTitle": {"S": "Somewhat Famous"}}' \
---return-consumed-capacity TOTAL
+'{"Artist": {"S": "Artist1"}, "SongTitle": {"S": "Song1"}, "AlbumTitle": {"S": "Album1"}}' \
+--return-consumed-capacity TOTAL \
 --endpoint-url http://localhost:8000
+
+## Delete table
+
+> aws dynamodb delete-table \
+--table-name Music \
+--endpoint-url http://localhost:8000
+
+## Docker
+
+sbt assembly
+
+docker build -t "niklastest" .
+
+docker run -e AWS_ACCESS_KEY_ID=2 -e AWS_SECRET_ACCESS_KEY=2 -it "niklastest"
 
 
 ## References
 [Instruction about docker]
+
 [Cli examples]
 
 

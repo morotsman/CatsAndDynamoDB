@@ -4,6 +4,11 @@ version := "0.1"
 
 scalaVersion := "2.13.6"
 
+assemblyMergeStrategy in assembly := {
+  case PathList("META-INF", "MANIFEST.MF") => MergeStrategy.discard
+  case x => MergeStrategy.first
+}
+
 libraryDependencies ++= Seq(
   // cats
   "org.typelevel" %% "cats-core" % "2.1.1",
