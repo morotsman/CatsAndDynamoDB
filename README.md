@@ -43,16 +43,6 @@ docker-compose up
 
 >Default output format [None]:
 
-## Test setup:
-
-> aws dynamodb list-tables --endpoint-url http://localhost:8000
-
-You should get an empty list
-
-## When running locally:
-
-Remember to add --endpoint-url http://localhost:8000 to all AWS console commands
-
 ## Create table (used in demo)
 
 > aws dynamodb create-table \
