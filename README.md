@@ -45,13 +45,13 @@ AttributeName=Artist,AttributeType=S \
 --table-name Music \
 --endpoint-url http://localhost:8000
 
-## Docker
+## Build and deploy
 
-sbt assembly
+>sbt assembly
 
-docker build -t "niklastest" .
+>docker build -t "niklastest" .
 
-docker run -e AWS_ACCESS_KEY_ID=2 -e AWS_SECRET_ACCESS_KEY=2 -it "niklastest"
+>docker-compose up
 
 ## Trace after first time docker-compose up
 
