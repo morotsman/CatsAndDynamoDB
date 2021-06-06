@@ -11,7 +11,7 @@ trait DynamoDBServer extends BeforeAndAfterAll {
   System.setProperty("sqlite4java.library.path", "native-libs")
 
   private val server: Try[DynamoDBProxyServer] = Try {
-    ServerRunner.createServerFromCommandLineArgs(Array("-inMemory"))
+    ServerRunner.createServerFromCommandLineArgs(Array("-inMemory", "-port", "8001"))
   }
 
   override def beforeAll(): Unit = {
