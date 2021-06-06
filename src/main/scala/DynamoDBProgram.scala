@@ -1,9 +1,12 @@
 import cats.effect.IO
 import org.scanamo.{DynamoReadError, ScanamoCats, Table}
+import org.scanamo.generic.auto._
 
 object DynamoDBProgram {
 
-  def program(table: Table[Music], client: ScanamoCats[IO]): IO[Unit] = {
+  private val table = Table[Music]("Music")
+
+  def program(client: ScanamoCats[IO]): IO[Unit] = {
     for {
       _ <- printLn("Start program")
       lem1 <- client.exec {
