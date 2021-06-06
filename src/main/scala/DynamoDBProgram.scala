@@ -6,18 +6,24 @@ object DynamoDBProgram {
   def program(table: Table[Music], client: ScanamoCats[IO]): IO[Unit] = {
     for {
       _ <- printLn("Start program")
-      lem <- client.exec {
+      lem1 <- client.exec {
         table.scan
       }
-      _ <- printLn("Before putAll: " + lem)
-      _ <-
-        client.exec {
-          table.putAll(items(lem))
+      _ <- printLn("Before first putAll: " + lem1)
+      _ <- client.exec {
+          table.putAll(items(lem1))
         }
-      rs <- client.exec {
+      lem2 <- client.exec {
         table.scan
       }
-      _ <- printLn("After putAll: " + rs)
+      _ <- printLn("After first putAll: " + lem2)
+      _ <- client.exec {
+        table.putAll(items(lem2))
+      }
+      lem3 <- client.exec {
+        table.scan
+      }
+      _ <- printLn("After second putAll: " + lem3)
       _ <- printLn("Program completed")
     } yield ()
   }

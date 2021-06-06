@@ -1,7 +1,7 @@
 ## What the program does
 Start up two docker containers, one with DynamoDB and one with a small Scala app.
 
-The Scala app reads the items stored in the Music table and then write the same posts back
+The Scala app reads the items stored in the Music table and then write the same posts back two times in a row
 
 ## Expected behavior
 
@@ -9,7 +9,7 @@ The content in the table should be the same after the program
 
 ## In reality
 
-Looks like the table contains duplicates. The second time the program run it crashes, see stack trace below.
+Looks like the table contains duplicates. The second time the putAll run it crashes, see stack trace below.
 
 ## Running on
 * macOS Big Sur Version 11.4
@@ -27,11 +27,6 @@ Looks like the table contains duplicates. The second time the program run it cra
 
 ### Test
 * docker-compose up
-* Let the program run
-* docker-compose down
-* docker-compose up
-
-
 
 ## Start local DynamoDB
 
@@ -81,24 +76,29 @@ AttributeName=Artist,AttributeType=S \
 >docker build -t "niklastest" .
 
 
-## Trace after first time docker-compose up
+## Expected trace from program
+
+
+> Start program
+
+>Before first putAll: List(Right(Music(Artist1,SongTitle1,AlbumTitle)))
+
+>After first putAll: List(Right(Music(Artist1,SongTitle1,AlbumTitle)))
+
+>After second putAll: List(Right(Music(Artist1,SongTitle1,AlbumTitle)))
+
+>Program completed
+
+## Real trace from program
 
 >app-node          | Start program
 
->app-node          | Before putAll: List(Right(Music(Artist1,Song1,Album1)))
+>app-node          | Before first putAll: List(Right(Music(Artist1,Song1,Album1)))
 
->app-node          | After putAll: List(Right(Music(Artist1,Song1,Album1)), Right(Music(Artist1,Song1,Album1)))
+>app-node          | After first putAll: List(Right(Music(Artist1,Song1,Album1)), Right(Music(Artist1,Song1,Album1)))
 
->app-node          | Program completed
-
-## Trace after first second docker-compose up
-
->app-node          | Start program
-
->app-node          | Before putAll: List(Right(Music(Artist1,Song1,Album1)), Right(Music(Artist1,Song1,Album1)))
-
->dynamodb-local    | Jun 05, 2021 7:47:58 AM com.almworks.sqlite4java.Internal log
-dynamodb-local    | WARNING: [sqlite] SQLiteDBAccess$14@4b0e6f64: job exception
+>dynamodb-local    | Jun 06, 2021 5:22:40 AM com.almworks.sqlite4java.Internal log
+dynamodb-local    | WARNING: [sqlite] SQLiteDBAccess$14@4897a9f0: job exception
 dynamodb-local    | com.amazonaws.services.dynamodbv2.local.shared.exceptions.LocalDBAccessException: Given key conditions were not unique. Returned: [{Artist=AttributeValue: {S:Artist1}, SongTitle=AttributeValue: {S:Song1}, AlbumTitle=AttributeValue: {S:Album1}}] and [{Artist=AttributeValue: {S:Artist1}, AlbumTitle=AttributeValue: {S:Album1}, SongTitle=AttributeValue: {S:Song1}}].
 dynamodb-local    | 	at com.amazonaws.services.dynamodbv2.local.shared.access.LocalDBUtils.ldAccessFail(LocalDBUtils.java:799)
 dynamodb-local    | 	at com.amazonaws.services.dynamodbv2.local.shared.access.sqlite.SQLiteDBAccessJob.getRecordInternal(SQLiteDBAccessJob.java:224)
@@ -113,7 +113,7 @@ dynamodb-local    | 	at com.almworks.sqlite4java.SQLiteQueue.access$000(SQLiteQu
 dynamodb-local    | 	at com.almworks.sqlite4java.SQLiteQueue$1.run(SQLiteQueue.java:205)
 dynamodb-local    | 	at java.lang.Thread.run(Thread.java:748)
 dynamodb-local    |
-dynamodb-local    | Jun 05, 2021 7:47:58 AM com.almworks.sqlite4java.Internal log
+dynamodb-local    | Jun 06, 2021 5:22:41 AM com.almworks.sqlite4java.Internal log
 
 ## References
 

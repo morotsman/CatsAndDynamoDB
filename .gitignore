@@ -2,3 +2,5 @@
 .idea/
 target/
 docker/
+native-libs/
+dynamodb-local/
