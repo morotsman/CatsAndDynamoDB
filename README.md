@@ -28,10 +28,6 @@ Looks like the table contains duplicates. The second time the putAll run it cras
 ### Test
 * docker-compose up
 
-## Start local DynamoDB
-
-docker-compose up
-
 ## Configure AWS console
 
 > aws configure
